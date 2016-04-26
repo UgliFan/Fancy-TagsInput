@@ -30,13 +30,13 @@ define(['jquery'],function($){
             if (regex.test(str)) {
               return true;
             } else {
-              this.activeMsg('请输入正确的邮箱格式,如:名字&lt;name@email.com&gt;', false);
-              this.dom.find('.ykb-tags-input').val(str.replace(/(\ |\;|\；)/g,''));
+              _utils.activeMsg('请输入正确的邮箱格式,如:名字&lt;name@email.com&gt;', false);
+              _utils.dom.find('.ykb-tags-input').val(str.replace(/(\ |\;|\；)/g,''));
               return false;
             }
           } else {
-            this.dom.find('.ykb-tags-input').val('');
-            this.activeMsg('邮箱长度必须在1到100之间', false);
+            _utils.dom.find('.ykb-tags-input').val('');
+            _utils.activeMsg('邮箱长度必须在1到100之间', false);
           }
         },
         genObj:function(value){
@@ -267,7 +267,7 @@ define(['jquery'],function($){
       var $that=$this.opts.reco;
       if($that && $.isArray($that)){
         $this._eachReco($that);
-      }else {
+      }else if($that){
         var promise=$that();
         if (promise && typeof promise.then === 'function') {
           promise.then(function (data) {
@@ -368,7 +368,7 @@ define(['jquery'],function($){
     init:function(container,options){
       options=options===undefined?{}:options;
       _utils.container=$(container);
-      _utils.opts=$.extend({},true,defaults,options);
+      _utils.opts=$.extend(true,{},defaults,options);
       _utils.dom=$(_utils.buildTmpl());
       _utils.initEvent();
       _utils.container.html(_utils.dom);
